@@ -6,7 +6,7 @@ Bangram is a powerful massreport tool with **built-in accounts & proxies**, desi
 
 ![Bangram Preview](https://i.imgur.com/Z95nn32.png)
 
------
+----
 
 ## ✨ Features
 - ⚡ Fully automated  
@@ -15,7 +15,7 @@ Bangram is a powerful massreport tool with **built-in accounts & proxies**, desi
 - 📈 Regular updates  
 - 🧩 No setup required  
 
------
+----
 
 ## 🖼️ Preview
 
