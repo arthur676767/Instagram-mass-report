@@ -1,8 +1,11 @@
 name: Auto Update README
 
+permissions:
+  contents: write
+
 on:
   schedule:
-    - cron: "0 0 * * *" # daily (UTC)
+    - cron: "0 0 * * *" # daily UTC
   workflow_dispatch:
 
 jobs:
