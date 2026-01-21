@@ -2,8 +2,8 @@ name: Auto Update README
 
 on:
   schedule:
-    - cron: "0 0 * * *" # runs daily (UTC)
-  workflow_dispatch: # allows manual run
+    - cron: "0 0 * * *" # daily (UTC)
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -16,7 +16,7 @@ jobs:
       - name: Update README timestamp
         run: |
           DATE=$(date -u "+%Y-%m-%d %H:%M UTC")
-          sed -i "s|<!-- AUTO-UPDATE-START -->.*<!-- AUTO-UPDATE-END -->|<!-- AUTO-UPDATE-START -->\n_Last updated: $DATE_\n<!-- AUTO-UPDATE-END -->|s" README.md
+          perl -0777 -i -pe "s|<!-- AUTO-UPDATE-START -->.*?<!-- AUTO-UPDATE-END -->|<!-- AUTO-UPDATE-START -->\n_Last updated: $DATE_\n<!-- AUTO-UPDATE-END -->|gs" README.md
 
       - name: Commit changes
         run: |
