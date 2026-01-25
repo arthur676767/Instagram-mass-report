@@ -6,6 +6,7 @@ permissions:
 on:
   schedule:
     - cron: "0 */4 * * *"
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -14,15 +15,36 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Update README timestamp
+      - name: Update README (hard replace)
         run: |
-          DATE=$(date -u "+%Y-%m-%d %H:%M UTC")
-          perl -0777 -i -pe "s|<!-- AUTO-UPDATE-START -->.*?<!-- AUTO-UPDATE-END -->|<!-- AUTO-UPDATE-START -->\n_Last updated: $DATE_\n<!-- AUTO-UPDATE-END -->|gs" README.md
+          DATE=$(date -u "+%Y-%m-%d %H:%M:%S UTC")
+
+          python3 - << 'EOF'
+from pathlib import Path
+
+readme = Path("README.md")
+text = readme.read_text(encoding="utf-8")
+
+start = "<!-- AUTO-UPDATE-START -->"
+end = "<!-- AUTO-UPDATE-END -->"
+
+if start not in text or end not in text:
+    raise SystemExit("AUTO-UPDATE markers not found in README.md")
+
+new_block = f"""{start}
+_Last updated: {DATE}_
+{end}"""
+
+before = text.split(start)[0]
+after = text.split(end)[1]
+
+readme.write_text(before + new_block + after, encoding="utf-8")
+EOF
 
       - name: Commit & push
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
           git add README.md
-          git commit -m "chore: auto-update README" || exit 0
+          git commit -m "chore: auto-update README timestamp" || exit 0
           git push
