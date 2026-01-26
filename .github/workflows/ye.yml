@@ -18,7 +18,6 @@ jobs:
       - name: Update README timestamp
         run: |
           DATE=$(date -u "+%Y-%m-%d %H:%M:%S UTC")
-
           python3 <<EOF
 from pathlib import Path
 
