@@ -1,4 +1,4 @@
-# 🚀 Bangram – Automation Tool
+# 🚀 Bangram – Mass report tool
 
 ⚡ **Fast. Simple. Automated.**
 
