@@ -40,6 +40,6 @@ For educational and research purposes only.
 Users are responsible for their own usage.
 
 <!-- AUTO-UPDATE-START -->
-_Last updated: 
+_Last updated: never_
 <!-- AUTO-UPDATE-END -->
 
